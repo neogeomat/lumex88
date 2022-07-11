@@ -9,10 +9,16 @@ var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // add satellite tiles
-var BING_KEY =
-  "AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L";
-var bing = L.tileLayer.bing(BING_KEY);
+// https://api.maptiler.com/tiles/satellite-v2/3/6/3.jpg?key=l21BHN6UMYoKzYKqxkKm
+var mapTiler = L.tileLayer('https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=l21BHN6UMYoKzYKqxkKm',{
+  tileSize: 512,
+  zoomOffset: -1,
+  minZoom: 1,
+  attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+  crossOrigin: true
+}).addTo(map);
 
+// add countries layer
 var listOfCountriesOrange = ["Ukraine"];
 var listOfCountriesGreen = [
   "Albania",
@@ -91,7 +97,7 @@ var layerSwitcher = L.control
     // baselayers
     {
       OpenStreetMap: osm,
-      Bing: bing,
+      MapTiler: mapTiler,
     },
     // overlays
     {
